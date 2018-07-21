@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>checkSaveCode</display-name>
+  <welcome-file-list>
+    <welcome-file>checkCode.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>saveCodeServlet</servlet-name>
+    <servlet-class>tools.SaveCodeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>saveCodeServlet</servlet-name>
+    <url-pattern>/saveCode.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>checkCodeServlet</servlet-name>
+    <servlet-class>tools.CheckCodeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>checkCodeServlet</servlet-name>
+    <url-pattern>/checkCode.do</url-pattern>
+  </servlet-mapping>
+  
+</web-app>

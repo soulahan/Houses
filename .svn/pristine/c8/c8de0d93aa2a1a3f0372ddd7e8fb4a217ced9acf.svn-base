@@ -1,0 +1,116 @@
+package dao.impl;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.omg.CORBA.PUBLIC_MEMBER;
+
+import util.DBHelp;
+
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+import dao.IHouseNewsDao;
+import entity.HouseNews;
+
+public class HouseNewsDaoImpl implements IHouseNewsDao {
+
+	@Override
+	public List<HouseNews> getAllHouse() {
+	   //    遍历全部房源信息
+		QueryRunner   qr  =  new  QueryRunner(DBHelp.getDataSource()
+				)  ;
+		
+		String sql  =  "select * form housenews" ;
+		
+		List<HouseNews> list = null ;
+		
+		try {
+			list  =  qr.query(sql, new BeanListHandler<HouseNews>(HouseNews.class)) ;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	     
+		return list;
+	}
+   
+	//   新增房源信息
+	@Override
+	public boolean addHouse(int userId ,String houseTitle, String houseType, int area,
+			int bedNumber, int price, String housePictures,
+			String dateOfHouseCard, String location, int contact,
+			String detailedMessage, int bath, String carBarn) {
+		 QueryRunner qr   =  new  QueryRunner(DBHelp.getDataSource()) ;
+		    String  sql  =   "INSERT  INTO housenews(userId,houseTitle,houseType,area,bedNumber,price,housePictures,dateOfHouseCard,location,contact,detailedMessage,bath,carBarn) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
+	        int  no ;
+			Object[]   obje  =   {userId, houseTitle,houseType,area,bedNumber,price,housePictures,dateOfHouseCard,location,contact,detailedMessage,bath,carBarn};
+	        try {
+				no = qr.update(sql, obje );
+				if(no>0){
+					   return true ;
+				}else {
+					return false ;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		return false;
+	}
+     
+	//   删除房源信息
+	@Override
+	public boolean deleteHouse(int houseid) {
+          QueryRunner  qr   =   new QueryRunner(DBHelp.getDataSource())  ;
+          
+          String sql  =  " DELETE FROM  housenews where houseId = ? "  ;
+          
+          int nu ;
+          
+          try {
+			nu  =  qr.update(sql , houseid);
+			if(nu>0){
+				return true ;
+			}else {
+				return  false;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+  
+	//   修改房源信息
+	@Override
+	public boolean updateHouse(int userId ,String houseTitle, String houseType, int area,
+			int bedNumber, int price, String housePictures,
+			String dateOfHouseCard, String location, int contact,
+			String detailedMessage, int bath, String carBarn, int houseId) {
+		
+		QueryRunner  qr  =   new   QueryRunner() ;
+		
+	    String  sql  =   "UPDATE  housenews SET userId = ? ,houseTitle = ? ,houseType = ? ,area = ? ,bedNumber = ? ,price = ? ,housePictures = ? ,dateOfHouseCard = ? ,location= ?,contact = ? , detailedMessage = ? ,bath = ? ,carBarn = ?   WHERE houseId = ?  " ;
+
+	    int nou ;
+	    
+	    Object[]  reoa  =  {userId, houseTitle, houseType , area , bedNumber , price , housePictures , dateOfHouseCard ,  location , contact , detailedMessage, bath , carBarn , houseId}  ; 
+	    
+	           try {
+				nou  =  qr.update(sql, reoa );
+				if (nou > 0){
+					return true ;
+				}else {
+					return false ;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		return false;
+	}
+
+}

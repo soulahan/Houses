@@ -1,0 +1,16 @@
+package dao;
+
+import entity.Users;
+
+public interface IUsersDao {
+
+	
+	public boolean addUserByUserName(String name,String phone,String passWord,String email);
+	
+
+	public Users userLoginByName(String name,String passWord);
+	
+
+	public boolean upDateByPhoneAndUserName(String userName,String phone,String passWord);
+
+}

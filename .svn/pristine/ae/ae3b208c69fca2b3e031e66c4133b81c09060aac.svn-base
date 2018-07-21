@@ -1,0 +1,58 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	   int houseId = Integer.parseInt(request.getParameter("houseId"));            ;
+%>
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+	</head>
+
+	<body class="">
+
+								<ul class="clearfix">
+								
+								
+								
+
+	
+								</ul>
+								
+<script type="text/javascript">
+   $(document).ready(function(){
+    alert(<%=houseId%>);
+       $.ajax({
+            url:"${pageContext.request.contextPath}/SingleServlet",
+           data:{
+     		  "houseId":<%=houseId%>},
+           type:"post",
+           dataType:"json",
+           success:function(msg){
+        	 
+               var sth;
+               $.each(msg,function(key,ll){
+sth="<li>"+ll.tArea+"</li><li>"+ll.tBedNumber+"</li><li>"+ll.tBath+"</li><li>"+ll.tType+"</li><li>"+ll.tContact+"</li><li>"+ll.tDate+"</li>"
+       $(".clearfix").append(sth);
+               })
+              
+               
+        
+           }
+           
+       });   
+   });
+								
+</script>								
+
+
+
+		<script src="assets/js/theme.js"></script>
+	</body>
+
+</html>

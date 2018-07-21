@@ -1,0 +1,30 @@
+package servlet;
+
+import java.io.IOException;
+import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import entity.HouseNews;
+import service.IHouseNewsService;
+import service.impl.HouseNewsServiceImpl;
+
+@SuppressWarnings("serial")
+@WebServlet(name="ListServlet",urlPatterns="/ListServlet")
+public class ListServlet extends HttpServlet{
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse respose) throws ServletException, IOException {
+		
+		doPost(request, respose);
+	}
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse respose) throws ServletException, IOException {
+		IHouseNewsService listhousenews = new HouseNewsServiceImpl();
+		List<HouseNews> list = listhousenews.getAllHouse();
+		request.setAttribute("listnews",list);
+		request.getRequestDispatcher("list.jsp").forward(request, respose);
+	}
+
+}

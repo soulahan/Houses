@@ -1,0 +1,20 @@
+package service;
+
+import java.util.List;
+
+import entity.HouseNews;
+
+public interface IHouseNewsService {
+	
+//  房源信息遍历
+	public List<HouseNews>  getAllHouse() ;
+	
+	//   新增房源
+	public  boolean    addHouse(int userId ,String  houseTitle  ,  String  houseType  ,  int area   ,  int bedNumber  ,   int  price  ,   String housePictures  , String   dateOfHouseCard ,  String  location  , int  contact ,  String detailedMessage ,  int  bath  , String carBarn);
+	
+   //   删除房源
+	public boolean  deleteHouse(int houseid);
+
+   //   修改房屋信息
+	public boolean  updateHouse(int userId ,String  houseTitle  ,  String  houseType  ,  int area   ,  int bedNumber  ,   int  price  ,   String housePictures  , String   dateOfHouseCard ,  String  location  , int  contact ,  String detailedMessage ,  int  bath  , String carBarn , int houseId);
+}
